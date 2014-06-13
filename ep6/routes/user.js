@@ -18,8 +18,20 @@ exports.register = function(req, res){
 };
 
 exports.update = function(req, res) {
+	
+	if (req.body.new_password = req.body.new_password_confirmation){
+	   req.user.username = req.body.username
+	   req.user.password = req.body.new_password
+	   req.user.save()
+	}
+  
+    res.redirect('/account')
+};
+
+/*
+exports.update = function(req, res) {
 	var t = function(cb, user) {
-    	if (user) {
+	   if (user) {
 		 req.user.password = req.body.new_password
 		 req.user.save()
 	   }
@@ -29,4 +41,5 @@ exports.update = function(req, res) {
 	}
   
     res.redirect('/account')
-};
+};*/
+
