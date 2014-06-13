@@ -91,6 +91,7 @@
             <div class="row-fluid">
 				<h2>&nbsp;</h2>
 				<form action="/account/update" method="post" class="form-horizontal">
+					<input type="hidden" name="_csrf" value=<%= csrftoken %>>
 					<div class="control-group">
 				     	<!-- Text input-->
 				     	<div class="controls">

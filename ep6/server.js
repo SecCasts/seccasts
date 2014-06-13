@@ -22,6 +22,11 @@ app.use(express.cookieParser())
 app.use(express.session({ secret: 'goatjsformakebettersecurity'}))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(express.csrf())
+app.use(function(req, res, next){
+	res.locals.csrftoken = req.csrfToken();
+	next();
+})
 app.use(app.router)
 
 if ('development' === app.get('env')) {
@@ -53,6 +58,11 @@ db
 			if (!user) {
 				db.User.build({username: 'admin', password: 'admin'}).save();
 			};
+		});
+		db.User.find({where: { username: 'user'} }).success(function (user) {
+			if (!user) {
+		 		db.User.build({ username: "user", password: "user" }).save();
+		 	};
 		});
 		
 		http.createServer(app).listen(app.get('port'), function(){
