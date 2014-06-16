@@ -14,7 +14,8 @@
 	"passport" : "latest",
 	"passport-local" : "latest",
 	"password" : "latest",
-	"bcrypt-nodejs" : "latest" 		
+	"bcrypt-nodejs" : "latest",
+	"helmet": "latest"
 	 
   }
 }

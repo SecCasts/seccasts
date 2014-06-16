@@ -1,4 +1,5 @@
-var express = require('express')
+var helmet = require('helmet') 
+ , express = require('express')
  , routes = require('./routes')
  , app = express()
  , user = require('./routes/user')
@@ -19,11 +20,22 @@ app.set('port', process.env.PORT || 3003)
 app.use(express.urlencoded())
 app.use(express.bodyParser())
 app.use(express.cookieParser())
-app.use(express.session({ secret: 'goatjsformakebettersecurity'}))
+app.use(express.session({ 
+	secret: 'goatjsformakebettersecurity',
+	cookie: {httpOnly: true}//, secure: true }
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.csrf())
+app.use(helmet.csp())
+app.use(helmet.xframe('sameorigin'))
+// Uncomment when using SSL
+//app.use(helmet.hsts())
+app.use(helmet.iexss())
+app.use(helmet.cacheControl())
 app.use(function(req, res, next){
+	res.setHeader("Pragma", "no-cache");
+	res.setHeader("Expires", "0");
 	res.locals.csrftoken = req.csrfToken();
 	next();
 })
