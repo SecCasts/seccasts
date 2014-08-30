@@ -1,0 +1,8 @@
+<%= form_tag login_sessions_path do %>
+    
+	Please enter your password to continue<br/><br/>
+    <%= hidden_field_tag :username, params[:username] %>
+	<%= password_field_tag :password, nil, {:placeholder => "Password"} %><br/><br/>
+	
+	<%= submit_tag "Submit", {:class => "btn btn-primary"}%>
+<% end %>

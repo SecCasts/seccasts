@@ -1,0 +1,7 @@
+<%= form_tag sessions_path do %>
+	<%= text_field_tag :username, nil, {:placeholder => "Username"} %><br/><br/>
+	
+	<%= recaptcha_tags :display =>  {:theme => 'clean'} %><br/><br/>
+	
+	<%= submit_tag "Submit", {:class => "btn btn-primary"}%>
+<% end %>	

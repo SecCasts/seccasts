@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VulnApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'bootstrap' %>
+  <%= stylesheet_link_tag    'bootstrap-theme' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" href="/">World's Most Securerest App FTW</a>
+	  	<div class="collapse navbar-collapse">
+	  			<ul class="nav navbar-nav navbar-right">
+				<% if not current_user%>
+	  		  	<li><%= link_to "Login", new_session_path %>
+				<% else %>
+	  	  		<li><%= link_to "Logout", "/sessions/#{current_user.id}", {:method => "delete"}%>
+				<% end %>
+	  			</ul>	 
+	  	</div>
+	  </div>
+	</nav>
+
+	<div id="wrapper">
+		<%#= partial "shared/sidebar".to_sym %>
+		<div class="container">
+			<%= yield %>
+		</div>
+	</div>
+
+</body>
+</html>
